@@ -1,0 +1,36 @@
+{
+  "name": "point-in-svg-path",
+  "version": "0.0.1",
+  "description": "Checks if a point is in an svg path",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "homepage": "https://github.com/maxnachlinger/point-in-svg-path",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/maxnachlinger/point-in-svg-path.git"
+  },
+  "bugs": {
+    "url": "https://github.com/maxnachlinger/point-in-svg-path/issues"
+  },
+  "engines": {
+    "node": "8.x.x"
+  },
+  "author": "Max Nachlinger",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "jest": "^22.3.0"
+  },
+  "standard": {
+    "globals": [
+      "jest",
+      "beforeEach",
+      "afterEach",
+      "describe",
+      "it",
+      "expect"
+    ]
+  }
+}
