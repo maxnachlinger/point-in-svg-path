@@ -355,32 +355,36 @@ function pathBBox (path) {
     return box()
   }
 
-  path = path2curve(path)
-  var x = 0,
-    y = 0,
-    X = [],
-    Y = [],
-    p
-  for (var i = 0, ii = path.length; i < ii; i++) {
-    p = path[i]
+  var pathLocal = path2curve(path)
+  var x = 0
+  var y = 0
+  var X = []
+  var Y = []
+  var p = []
+
+  for (var i = 0, c = pathLocal.length; i < c; i++) {
+    p = pathLocal[i]
     if (p[0] == 'M') {
       x = p[1]
       y = p[2]
       X.push(x)
       Y.push(y)
-    } else {
-      var dim = curveDim(x, y, p[1], p[2], p[3], p[4], p[5], p[6])
-      X = X.concat(dim.min.x, dim.max.x)
-      Y = Y.concat(dim.min.y, dim.max.y)
-      x = p[5]
-      y = p[6]
+      continue
     }
+
+    var dim = curveDim(x, y, p[1], p[2], p[3], p[4], p[5], p[6])
+    X = X.concat(dim.min.x, dim.max.x)
+    Y = Y.concat(dim.min.y, dim.max.y)
+    x = p[5]
+    y = p[6]
   }
-  var xmin = Math.min.apply(0, X),
-    ymin = Math.min.apply(0, Y),
-    xmax = Math.max.apply(0, X),
-    ymax = Math.max.apply(0, Y),
-    bb = box(xmin, ymin, xmax - xmin, ymax - ymin)
+
+  var xmin = Math.min.apply(0, X)
+  var ymin = Math.min.apply(0, Y)
+  var xmax = Math.max.apply(0, X)
+  var ymax = Math.max.apply(0, Y)
+  var bb = box(xmin, ymin, xmax - xmin, ymax - ymin)
+
   pth.bbox = clone(bb)
   return bb
 }
