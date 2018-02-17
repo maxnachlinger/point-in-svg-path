@@ -1,6 +1,6 @@
 'use strict'
 
-const {isPointInsidePath} = require('../')
+const pointInSvgPath = require('../')
 
 describe('lib', () => {
   it('correctly identifies a point inside a path', () => {
@@ -17,7 +17,7 @@ describe('lib', () => {
       input: ['M230 230A 45 45, 0, 1, 1, 275 275L 275 230 Z', 300, 235],
       expected: true
     }].forEach(({input, expected}) => {
-      expect(isPointInsidePath(...input)).toBe(expected)
+      expect(pointInSvgPath(...input)).toBe(expected)
     })
   })
 
@@ -35,7 +35,7 @@ describe('lib', () => {
       input: ['M230 230A 45 45, 0, 1, 1, 275 275L 275 230 Z', 250, 235],
       expected: false
     }].forEach(({input, expected}) => {
-      expect(isPointInsidePath(...input)).toBe(expected)
+      expect(pointInSvgPath(...input)).toBe(expected)
     })
   })
 })

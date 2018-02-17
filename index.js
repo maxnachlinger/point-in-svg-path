@@ -867,6 +867,7 @@ function path2curve (path, path2) {
     }
     return path
   }
+
   var fixArc = function (pp, i) {
     if (pp[i].length > 7) {
       pp[i].shift()
@@ -880,6 +881,7 @@ function path2curve (path, path2) {
       ii = Math.max(p.length, p2 && p2.length || 0)
     }
   }
+
   var fixM = function (path1, path2, a1, a2, i) {
     if (path1 && path2 && path1[i][0] == 'M' && path2[i][0] != 'M') {
       path2.splice(i, 0, ['M', a2.x, a2.y])
@@ -953,29 +955,32 @@ function path2curve (path, path2) {
 // http://schepers.cc/getting-to-the-point
 function catmullRom2bezier (crp, z) {
   var d = []
-  for (var i = 0, iLen = crp.length; iLen - 2 * !z > i; i += 2) {
+
+  for (var i = 0, c = crp.length; c - 2 * !z > i; i += 2) {
     var p = [
       {x: +crp[i - 2], y: +crp[i - 1]},
       {x: +crp[i], y: +crp[i + 1]},
       {x: +crp[i + 2], y: +crp[i + 3]},
       {x: +crp[i + 4], y: +crp[i + 5]}
     ]
+
     if (z) {
       if (!i) {
-        p[0] = {x: +crp[iLen - 2], y: +crp[iLen - 1]}
-      } else if (iLen - 4 == i) {
+        p[0] = {x: +crp[c - 2], y: +crp[c - 1]}
+      } else if (c - 4 == i) {
         p[3] = {x: +crp[0], y: +crp[1]}
-      } else if (iLen - 2 == i) {
+      } else if (c - 2 == i) {
         p[2] = {x: +crp[0], y: +crp[1]}
         p[3] = {x: +crp[2], y: +crp[3]}
       }
     } else {
-      if (iLen - 4 == i) {
+      if (c - 4 == i) {
         p[3] = p[2]
       } else if (!i) {
         p[0] = {x: +crp[i], y: +crp[i + 1]}
       }
     }
+
     d.push(['C',
       (-p[0].x + 6 * p[1].x + p[2].x) / 6,
       (-p[0].y + 6 * p[1].y + p[2].y) / 6,
@@ -989,7 +994,7 @@ function catmullRom2bezier (crp, z) {
   return d
 }
 
-const isPointInsidePath = (path, x, y) => {
+module.exports = (path, x, y) => {
   const bbox = pathBBox(path)
 
   if (!isPointInsideBBox(bbox, x, y)) {
@@ -1002,5 +1007,3 @@ const isPointInsidePath = (path, x, y) => {
 
   return true
 }
-
-module.exports = {isPointInsidePath}
