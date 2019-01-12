@@ -21,7 +21,7 @@
   "license": "ISC",
   "dependencies": {},
   "devDependencies": {
-    "jest": "^22.3.0"
+    "jest": "^23.6.0"
   },
   "standard": {
     "globals": [
