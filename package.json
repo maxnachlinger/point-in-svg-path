@@ -1,6 +1,6 @@
 {
   "name": "point-in-svg-path",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Checks if a point is in an svg path",
   "main": "index.js",
   "scripts": {
