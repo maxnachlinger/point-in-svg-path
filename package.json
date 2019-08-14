@@ -15,7 +15,7 @@
     "url": "https://github.com/maxnachlinger/point-in-svg-path/issues"
   },
   "engines": {
-    "node": "8.x.x"
+    "node": ">=8.x.x"
   },
   "author": "Max Nachlinger",
   "license": "ISC",
